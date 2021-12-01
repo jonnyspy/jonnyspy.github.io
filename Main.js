@@ -55,6 +55,7 @@ PImage cloud;
 PImage bloodTreeWood;
 PImage leaf;
 PImage dragon;
+PImage sword;
 
 var cooldown = 0;
 var room = 0;
@@ -118,6 +119,7 @@ var mob1Speed = 1;
 var mob2 = [];
 var numberOfMobs = 5;
 var mobsPerRoom = 0;
+var swordDelay = 10;
 
 void setup() {
 	size(1000,512);
@@ -146,6 +148,7 @@ void setup() {
 	cloud = loadImage("Sprites/cloud.png");
 	bloodLeaf = loadImage("Sprites/blood leaf.png");
 	playerFrame = loadImage("Sprites/player.png");
+	sword = loadImage("Sprites/sword.png");
 }
 
 void keyPressed() {
@@ -1342,12 +1345,19 @@ function Mob1(i) {
 		var mobXBlock = round(mob1[i][0]/blockSize);
 		var mobYBlock = round(mob1[i][1]/blockSize);
 		
-		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 3*blockSize) {
-			alert("yes");
+		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 2*blockSize) {
+			health -= 1;
+		}
+		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 4*blockSize) {
+			if(keys[DOWN] && swordDelay < 0) {
+				mob1[i][2] -= 3;
+				swordDelay = 10;
+			}
 		}
 
 		
 	}
+	swordDelay -= 0.7;
 	
 }
 
