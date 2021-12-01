@@ -896,3 +896,625 @@ var rooms = [
 
 //current room field
 var field = [];
+
+function drawPlayer() {
+	fill(255,0,0);
+	image(playerFrame,playerX+1,playerY-blockSize,blockSize*2,blockSize*2);
+	
+	playerX += playerXSpeed;
+	playerY += playerYSpeed;
+	playerYSpeed += gravity;
+	
+	var playerXBlockM = round(playerX/blockSize);
+	var playerYBlockM = round(playerY/blockSize);
+	var mouseXBlock = round(mouseX/blockSize);
+	var mouseYBlock = round(mouseY/blockSize);
+	
+	//temp
+	if (mousePressed) {
+		if (mouseButton == RIGHT) {
+			field[mouseYBlock][mouseXBlock] = AIR;
+			field[mouseYBlock-1][mouseXBlock] = AIR;
+			field[mouseYBlock+1][mouseXBlock] = AIR;
+			field[mouseYBlock][mouseXBlock-1] = AIR;
+			field[mouseYBlock][mouseXBlock+1] = AIR;
+			field[mouseYBlock-1][mouseXBlock-1] = AIR;
+			field[mouseYBlock+1][mouseXBlock+1] = AIR;
+			field[mouseYBlock-1][mouseXBlock+1] = AIR;
+			field[mouseYBlock+1][mouseXBlock-1] = AIR;
+		}
+		if (mouseButton == LEFT) {
+			field[mouseYBlock][mouseXBlock] = DIRT;
+			field[mouseYBlock-1][mouseXBlock] = DIRT;
+			field[mouseYBlock+1][mouseXBlock] = DIRT;
+			field[mouseYBlock][mouseXBlock-1] = DIRT;
+			field[mouseYBlock][mouseXBlock+1] = DIRT;
+			field[mouseYBlock-1][mouseXBlock-1] = DIRT;
+			field[mouseYBlock+1][mouseXBlock+1] = DIRT;
+			field[mouseYBlock-1][mouseXBlock+1] = DIRT;
+			field[mouseYBlock+1][mouseXBlock-1] = DIRT;
+		}
+	}
+	
+	if(field[playerYBlockM][playerXBlockM] == LAVA) {
+		health -= 1;
+	}
+	if(health < 0) {
+		
+		
+		playerX = 500;
+		playerY = 200;
+		room = 0;
+		health = 100;
+		
+	}
+	
+	if(field[playerYBlockM][playerXBlockM] == FIRE) {
+		playerYSpeed -= 8;
+		if(health < 100) {
+			health += 10;
+		}
+	}
+	if(field[playerYBlockM][playerXBlockM] == WATER || field[playerYBlockM][playerXBlockM] == BLOODLAKE) {
+		if (playerYSpeed > 1) {
+			playerYSpeed = 1;
+		}
+		if (playerYSpeed < -2) {
+			playerYSpeed = -2;
+		}
+		if (playerXSpeed > 1) {
+			playerXSpeed = 1;
+		}
+		if (playerXSpeed < -1) {
+			playerXSpeed = -1;
+		}
+	}
+
+	if (keys[RIGHT] && playerXSpeed < 2) {
+		playerXSpeed += 0.1;
+	}
+	if (keys[LEFT] && playerXSpeed > -2) {
+		playerXSpeed -= 0.1;
+	}
+	if (keys[UP] && isOnGround) {
+		playerYSpeed -= 4;
+	}
+	if (playerY < blockSize) {
+		playerY = blockSize;
+	}
+	
+	
+	if (playerYSpeed > 0) {
+		var playerXBlock = round(playerX/blockSize);
+		var playerYBlock = round(playerY/blockSize);
+		
+		if (
+			field[playerYBlock+1][playerXBlock] != AIR &&
+			field[playerYBlock+1][playerXBlock] != FIRE &&
+			field[playerYBlock+1][playerXBlock] != CAVEWALL &&
+			field[playerYBlock+1][playerXBlock] != DARKCAVEWALL &&
+			field[playerYBlock+1][playerXBlock] != WATER &&
+			field[playerYBlock+1][playerXBlock] != TREEWALL &&
+			field[playerYBlock+1][playerXBlock] != LAVA &&
+			field[playerYBlock+1][playerXBlock] != LEAF &&
+			field[playerYBlock+1][playerXBlock] != RUINEDPILLAR &&
+			field[playerYBlock+1][playerXBlock] != BLOODLAKE &&
+			field[playerYBlock+1][playerXBlock] != BLOODTREEWOOD &&
+			field[playerYBlock+1][playerXBlock] != CLOUDS
+		) {
+			playerYSpeed = 0;
+			playerY = playerYBlock*blockSize;
+			isOnGround = true;
+		}
+		
+	}
+	else{
+		isOnGround = false;
+	}
+	
+	if (playerYSpeed < 0) {
+		var playerXBlock = round(playerX/blockSize);
+		var playerYBlock = round(playerY/blockSize);
+		
+		if (
+			field[playerYBlock-1][playerXBlock] != AIR &&
+			field[playerYBlock-1][playerXBlock] != FIRE &&
+			field[playerYBlock-1][playerXBlock] != CAVEWALL &&
+			field[playerYBlock-1][playerXBlock] != DARKCAVEWALL &&
+			field[playerYBlock-1][playerXBlock] != WATER &&
+			field[playerYBlock-1][playerXBlock] != TREEWALL &&
+			field[playerYBlock-1][playerXBlock] != LAVA &&
+			field[playerYBlock-1][playerXBlock] != LEAF &&
+			field[playerYBlock-1][playerXBlock] != RUINEDPILLAR &&
+			field[playerYBlock-1][playerXBlock] != BLOODLAKE &&
+			field[playerYBlock-1][playerXBlock] != BLOODTREEWOOD &&
+			field[playerYBlock-1][playerXBlock] != CLOUDS
+		) {
+			playerYSpeed = 0.1;
+
+
+		}
+		
+	}
+	
+	if (playerXSpeed > 0) {
+		var playerXBlock = round((playerX+blockSize/2)/blockSize);
+		var playerYBlock = round(playerY/blockSize);
+		
+		if (
+			field[playerYBlock][playerXBlock] != AIR &&
+			field[playerYBlock][playerXBlock] != FIRE &&
+			field[playerYBlock][playerXBlock] != CAVEWALL &&
+			field[playerYBlock][playerXBlock] != DARKCAVEWALL &&
+			field[playerYBlock][playerXBlock] != WATER &&
+			field[playerYBlock][playerXBlock] != TREEWALL &&
+			field[playerYBlock][playerXBlock] != LAVA &&
+			field[playerYBlock][playerXBlock] != LEAF &&
+			field[playerYBlock][playerXBlock] != RUINEDPILLAR &&
+			field[playerYBlock][playerXBlock] != BLOODLAKE &&
+			field[playerYBlock][playerXBlock] != BLOODTREEWOOD &&
+			field[playerYBlock][playerXBlock] != CLOUDS
+		) {
+			playerXSpeed = 0;
+			playerX = playerXBlock*blockSize-blockSize;
+		}
+		
+	}
+	
+	if (playerXSpeed < 0) {
+		var playerXBlock = round((playerX-blockSize/2)/blockSize);
+		var playerYBlock = round(playerY/blockSize);
+		
+		if (
+			field[playerYBlock][playerXBlock] != AIR &&
+			field[playerYBlock][playerXBlock] != FIRE &&
+			field[playerYBlock][playerXBlock] != CAVEWALL &&
+			field[playerYBlock][playerXBlock] != DARKCAVEWALL &&
+			field[playerYBlock][playerXBlock] != WATER &&
+			field[playerYBlock][playerXBlock] != TREEWALL &&
+			field[playerYBlock][playerXBlock] != LAVA &&
+			field[playerYBlock][playerXBlock] != LEAF &&
+			field[playerYBlock][playerXBlock] != RUINEDPILLAR &&
+			field[playerYBlock][playerXBlock] != BLOODLAKE &&
+			field[playerYBlock][playerXBlock] != BLOODTREEWOOD &&
+			field[playerYBlock][playerXBlock] != CLOUDS
+		) {
+			playerXSpeed = 0;
+			playerX = playerXBlock*blockSize+blockSize;
+		}
+
+		
+	}
+
+	for(var i = 0; i < portalLocations.length; i += 1) {
+
+
+		if (dist(portalLocations[i][0],portalLocations[i][1],playerX,playerY) < 3*blockSize) {
+			toPortal = true;
+		}
+
+	}
+	
+	
+	
+	
+
+
+	
+	
+};
+function drawBlock(type,x,y) {
+	switch(type) {
+		case AIR:
+
+		break;
+		
+		case DIRT:
+
+			image(dirt,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		
+		case REDPORTAL:
+			if (round(redPortalFrame) == 0) {
+				image(redPortal1,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(redPortalFrame) == 1) {
+				image(redPortal2,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(redPortalFrame) == 2) {
+				image(redPortal3,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(redPortalFrame) == 3) {
+				image(redPortal4,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (redPortalFrame > 3.5) {
+				redPortalFrame = -0.5;
+			}
+			
+		break;
+		
+		case GREENPORTAL:
+			if (round(greenPortalFrame) == 0) {
+				image(greenPortal1,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(greenPortalFrame) == 1) {
+				image(greenPortal2,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(greenPortalFrame) == 2) {
+				image(greenPortal3,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(greenPortalFrame) == 3) {
+				image(greenPortal4,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (greenPortalFrame > 3.5) {
+				greenPortalFrame = -0.5;
+			}
+			
+		break;
+		
+		case BLUEPORTAL:
+			if (round(blueFrame) == 0) {
+				image(blue12,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 1) {
+				image(blue2,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 2) {
+				image(blue3,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 3) {
+				image(blue4,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 4) {
+				image(blue5,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 5) {
+				image(blue6,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 6) {
+				image(blue7,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 7) {
+				image(blue8,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 8) {
+				image(blue9,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 9) {
+				image(blue11,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+			if (round(blueFrame) == 10) {
+				image(blue1,x*blockSize-(blockSize*3),y*blockSize-(blockSize*3),blockSize*5,blockSize*7);
+			}
+
+			if (blueFrame > 10.4) {
+				blueFrame = -0.5;
+			}
+			
+		break;
+		
+		case STONELIGHT:
+			image(stoneLight,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		
+		case GRASS:
+			image(grass,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		
+		case LEAF:
+			image(leaf,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		
+		case FIRE:
+			if (round(fireFrame) == 1) {
+				
+				image(fire1,x*blockSize-(blockSize*3),y*blockSize-(blockSize*6),blockSize*5,blockSize*7)
+			}
+			if (round(fireFrame) == 2) {
+
+				image(fire2,x*blockSize-(blockSize*3),y*blockSize-(blockSize*6),blockSize*5,blockSize*7);
+			}
+			if (fireFrame > 2) {
+				fireFrame = 1;
+			}
+		break;
+		
+		case DARKCAVEWALL:
+			image(caveWall1,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case WATER:
+			if (round(waterFrame) == 0) {
+				
+				image(water1,x*blockSize,y*blockSize,blockSize,blockSize)
+			}
+			if (round(waterFrame) == 1) {
+
+				image(water2,x*blockSize,y*blockSize,blockSize,blockSize);
+			}
+			if (waterFrame > 1) {
+				waterFrame = 0;
+			}
+		break;
+		
+		case STALAGMITE:
+			image(stalagtite,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		
+		case CACTUS:
+			image(cactus,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		
+		case CAVEWALL:
+			image(cavewall,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		
+		case SAND:
+			image(sand,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case WOOD:
+			image(wood,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case TREEWALL:
+			image(woodWall,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case LAVA:
+			image(lava,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case SANDSTONE:
+			image(sandstone,x*blockSize,y*blockSize,blockSize,blockSize);
+			
+		break;
+		
+		case RUINEDPILLAR:
+			image(ruinPillar,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case CAVEFLOOR:
+			image(caveFloor,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case BLOODLAKE:
+			if (round(bloodFrame) == 0) {
+				
+				image(bloodLake,x*blockSize,y*blockSize,blockSize,blockSize)
+			}
+			if (round(bloodFrame) == 1) {
+
+				image(bloodLake2,x*blockSize,y*blockSize,blockSize,blockSize);
+			}
+			if (round(bloodFrame) == 2) {
+
+				image(bloodLake3,x*blockSize,y*blockSize,blockSize,blockSize);
+			}
+			if (round(bloodFrame) == 3) {
+
+				image(bloodLake4,x*blockSize,y*blockSize,blockSize,blockSize);
+			}
+			if (bloodFrame > 3) {
+				bloodFrame = 0;
+			}
+		
+		break;
+		case BLOODTREEWOOD:
+			image(bloodTreeWood,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case ASHANDSAND:
+			image(ash,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case CLOUDS:
+			image(cloud,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		case BLOODTREELEAF:
+			image(bloodLeaf,x*blockSize,y*blockSize,blockSize,blockSize);
+		break;
+		default:
+			fill(255,255,255);
+			stroke(255,0,0);
+			rect(x*blockSize,y*blockSize,blockSize,blockSize);
+		
+	}
+}
+
+function Mob1(i) {
+	if (mob1[i] != []) {
+		playerFieldX = round(playerX/blockSize);
+		playerFieldY = round(playerY/blockSize);
+		
+		image(dragon,mob1[i][0]-3*blockSize,mob1[i][1]-3*blockSize,blockSize*6,blockSize*6);
+		
+		
+		if (mob1[i][2] < 0) {
+			mob1[i] = [];
+		}
+			
+		if (mob1[i][0] < playerX) {
+			mob1[i][0] += mob1Speed;
+		}
+		if (mob1[i][0] > playerX) {
+			mob1[i][0] -= mob1Speed;
+		}
+		if (mob1[i][1] < playerY) {
+			mob1[i][1] += mob1Speed;
+		}
+		if (mob1[i][1] > playerY) {
+			mob1[i][1] -= mob1Speed;
+		}
+		
+		
+		var mobXBlock = round(mob1[i][0]/blockSize);
+		var mobYBlock = round(mob1[i][1]/blockSize);
+
+		
+	}
+	
+}
+
+
+function Mob2() {
+	for(var i = 0; i < mob2.length; i += 1) {
+		
+	}
+}
+var music = new Audio("https://cdn.discordapp.com/attachments/906018721733160992/908893659552948284/viking_blues_-_111221_6.36_PM.m4a");
+draw = function() {
+	background(0,120,255);
+	
+	fill(0,0,0);
+	text(room,0,12);
+	
+	music.play();
+	
+	redPortalFrame += 0.02;
+	greenPortalFrame += 0.02;
+	fireFrame += 0.02;
+	waterFrame += 0.01;
+	blueFrame += 0.2;
+	bloodFrame += 0.01;
+	
+	field = rooms[room];
+	var playerFieldX = round(playerX/blockSize);
+	var playerFieldY = round(playerY/blockSize);
+	portalLocations = [];
+	
+	for(var i = 0; i < field.length; i += 1) {
+		for(var j = 0; j < field[i].length; j += 1) {
+			if (dist(playerFieldX,playerFieldY,j,i) < viewDistance) {
+				drawBlock(field[i][j],j,i);
+				
+			}
+			if (field[i][j] == REDPORTAL ||
+				field[i][j] == GREENPORTAL ||
+				field[i][j] == BLUEPORTAL 
+				
+			) {
+				
+				portalDrawLoc = [i, j];
+				portalLocations[portalLocations.length] = [j*blockSize, i*blockSize];
+				
+			}
+
+			
+			
+		}
+	}
+	
+	
+	drawBlock(field[portalDrawLoc[0]][portalDrawLoc[1]],portalDrawLoc[1],portalDrawLoc[0]);
+
+	
+	
+	if(start) {
+		redPortal1 = loadImage("Sprites/Portal 1.png");
+		redPortal2 = loadImage("Sprites/Portal 2.png");
+		redPortal3 = loadImage("Sprites/Portal 3.png");
+		redPortal4 = loadImage("Sprites/Portal 4.png");
+		greenPortal1 = loadImage("Sprites/Green 1.png");
+		greenPortal2 = loadImage("Sprites/Green 2.png");
+		greenPortal3 = loadImage("Sprites/Green 3.png");
+		greenPortal4 = loadImage("Sprites/Green 4.png");
+		fire1 = loadImage("Sprites/Fire 1.png");
+		fire2 = loadImage("Sprites/Fire 2.png");
+		water1 = loadImage("Sprites/0.png");
+		water2 = loadImage("Sprites/1.png");
+		
+		blue1 = loadImage("Sprites/Blue 0.png");
+		blue2 = loadImage("Sprites/Blue 1.png");
+		blue3 = loadImage("Sprites/Blue 2.png");
+		blue4 = loadImage("Sprites/Blue 3.png");
+		blue5 = loadImage("Sprites/Blue 4.png");
+		blue6 = loadImage("Sprites/Blue 5.png");
+		blue7 = loadImage("Sprites/Blue 6.png");
+		blue8 = loadImage("Sprites/Blue 7.png");
+		blue9 = loadImage("Sprites/Blue 8.png");
+		blue10 = loadImage("Sprites/Blue 9.png");
+		blue11 = loadImage("Sprites/Blue 11.png");
+		blue12 = loadImage("Sprites/Blue 12.png");
+		
+		bloodLake = loadImage("Sprites/blood lake.png");
+		bloodLake2 = loadImage("Sprites/blood lake 2.png");
+		bloodLake3 = loadImage("Sprites/blood lake 3.png");
+		bloodLake4 = loadImage("Sprites/blood lake 4.png");
+		
+		dragon = loadImage("Sprites/dragon.png");
+		start = false;
+		
+	}
+	toPortal = false;
+	
+	drawPlayer();
+	
+	if (toPortal) {
+		
+		if(cooldown <= 0) {
+			room += 1;
+			mob1 = [];
+			mob2 = [];
+			mobsPerRoom = numberOfMobs;
+			if (room >= rooms.length) {
+				room = 0;
+			}
+			field = rooms[room];
+			
+			playerYSpeed = 0;
+			cooldown = 3;
+			
+		
+			for(var i = 0; i < field.length; i += 1) {
+				for(var j = 0; j < field[i].length; j += 1) {
+
+					if (field[i][j] == REDPORTAL ||
+						field[i][j] == GREENPORTAL ||
+						field[i][j] == BLUEPORTAL 
+						
+					) {
+						
+						playerX = j*blockSize-blockSize/2;
+						playerY = i*blockSize+blockSize*3;
+						
+
+						toPortal = false;
+					}
+					
+				}
+			}
+		}
+		
+	}
+	cooldown -= 0.01;
+
+	
+	//Mobs
+	if (mobsPerRoom > 0) {
+		var xPos = round(random(0,field.length-1));
+		var yPos = round(random(0,field[0].length-1));
+		
+		if ((field[xPos][yPos] == AIR || 
+			field[xPos][yPos] == CAVEWALL ||
+			field[xPos][yPos] == DARKCAVEWALL ||
+			field[xPos][yPos] == TREEWALL ||
+			field[xPos][yPos] == RUINEDPILLAR) &&
+			field[xPos][yPos] != null
+		) {
+			mob1[mob1.length] = [yPos*blockSize,xPos*blockSize,10];
+			mobsPerRoom -= 1;
+		}
+		
+	}
+	
+	for(var i = 0; i < mob1.length; i += 1) {
+		Mob1(i);
+	}
+	
+	//blackness
+	noFill();
+	stroke(0,0,0);
+	strokeWeight(1100);
+	ellipse(playerX,playerY,1500,1500);
+	
+	
+	//player healthbar
+	fill(255,0,0);
+	noStroke();
+	strokeWeight(1);
+	rect(10,10,health,20);
+	
+	
+};
