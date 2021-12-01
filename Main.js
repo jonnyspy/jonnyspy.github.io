@@ -1319,12 +1319,12 @@ function Mob1(i) {
 		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 2*blockSize) {
 			health -= 1;
 		}
-		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 4*blockSize) {
-			if(keys[DOWN] && swordDelay < 0) {
-				mob1[i][2] -= 3;
-				swordDelay = 10;
-			}
-		}
+		//if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 4*blockSize) {
+		//	if(keys[DOWN] && swordDelay < 0) {
+		//		mob1[i][2] -= 3;
+		//		swordDelay = 10;
+		//	}
+		//}
 
 		
 	}
