@@ -959,7 +959,10 @@ function drawPlayer() {
 	
 	if(keys[DOWN] && swordDelay >= 10) {
 		swordDelay = 0;
-		image(sword,playerX,playerY,32,32);
+		
+	}
+	if(swordDelay < 9.5) {
+		image(sword,playerX-16,playerY-16,32,32);
 	}
 	
 	
@@ -1328,7 +1331,7 @@ function Mob1(i) {
 		}
 		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
 			if(swordDelay < 10) {
-				mob1[i][2] -= 0.1;
+				mob1[i][2] -= 1;
 			}
 		}
 
