@@ -1342,7 +1342,7 @@ function Mob1(i) {
 		var mobXBlock = round(mob1[i][0]/blockSize);
 		var mobYBlock = round(mob1[i][1]/blockSize);
 		
-		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 3*blockSize) {
+		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 3*blockSize) {
 			alert("yes");
 		}
 
