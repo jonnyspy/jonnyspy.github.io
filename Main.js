@@ -1327,9 +1327,8 @@ function Mob1(i) {
 			health -= 0.3;
 		}
 		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
-			if(keys[DOWN] && swordDelay >= 10) {
-				mob1[i][2] -= 3;
-				swordDelay = 0;
+			if(swordDelay < 10) {
+				mob1[i][2] -= 0.1;
 			}
 		}
 
