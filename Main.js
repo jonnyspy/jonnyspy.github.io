@@ -116,7 +116,6 @@ var start = true;
 
 var mob1 = [];
 var mob1Speed = 1;
-var mob2 = [];
 var numberOfMobs = 5;
 var mobsPerRoom = 0;
 var swordDelay = 10;
@@ -910,34 +909,6 @@ function drawPlayer() {
 	
 	var playerXBlockM = round(playerX/blockSize);
 	var playerYBlockM = round(playerY/blockSize);
-	var mouseXBlock = round(mouseX/blockSize);
-	var mouseYBlock = round(mouseY/blockSize);
-	
-	//temp
-	if (mousePressed) {
-		if (mouseButton == RIGHT) {
-			field[mouseYBlock][mouseXBlock] = AIR;
-			field[mouseYBlock-1][mouseXBlock] = AIR;
-			field[mouseYBlock+1][mouseXBlock] = AIR;
-			field[mouseYBlock][mouseXBlock-1] = AIR;
-			field[mouseYBlock][mouseXBlock+1] = AIR;
-			field[mouseYBlock-1][mouseXBlock-1] = AIR;
-			field[mouseYBlock+1][mouseXBlock+1] = AIR;
-			field[mouseYBlock-1][mouseXBlock+1] = AIR;
-			field[mouseYBlock+1][mouseXBlock-1] = AIR;
-		}
-		if (mouseButton == LEFT) {
-			field[mouseYBlock][mouseXBlock] = DIRT;
-			field[mouseYBlock-1][mouseXBlock] = DIRT;
-			field[mouseYBlock+1][mouseXBlock] = DIRT;
-			field[mouseYBlock][mouseXBlock-1] = DIRT;
-			field[mouseYBlock][mouseXBlock+1] = DIRT;
-			field[mouseYBlock-1][mouseXBlock-1] = DIRT;
-			field[mouseYBlock+1][mouseXBlock+1] = DIRT;
-			field[mouseYBlock-1][mouseXBlock+1] = DIRT;
-			field[mouseYBlock+1][mouseXBlock-1] = DIRT;
-		}
-	}
 	
 	if(field[playerYBlockM][playerXBlockM] == LAVA) {
 		health -= 1;
@@ -973,10 +944,10 @@ function drawPlayer() {
 		}
 	}
 
-	if (keys[RIGHT] && playerXSpeed < 2) {
+	if (keys[RIGHT] && playerXSpeed < 2.3) {
 		playerXSpeed += 0.1;
 	}
-	if (keys[LEFT] && playerXSpeed > -2) {
+	if (keys[LEFT] && playerXSpeed > -2.3) {
 		playerXSpeed -= 0.1;
 	}
 	if (keys[UP] && isOnGround) {
@@ -1357,16 +1328,10 @@ function Mob1(i) {
 
 		
 	}
-	swordDelay -= 0.7;
+	swordDelay -= 1;
 	
 }
 
-
-function Mob2() {
-	for(var i = 0; i < mob2.length; i += 1) {
-		
-	}
-}
 var music = new Audio("https://cdn.discordapp.com/attachments/906018721733160992/908893659552948284/viking_blues_-_111221_6.36_PM.m4a");
 draw = function() {
 	background(0,120,255);
