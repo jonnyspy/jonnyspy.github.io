@@ -957,6 +957,11 @@ function drawPlayer() {
 		playerY = blockSize;
 	}
 	
+	if(keys[DOWN] && swordDelay >= 10) {
+		swordDelay = 0;
+		image(sword,playerX,playerY,32,32);
+	}
+	
 	
 	if (playerYSpeed > 0) {
 		var playerXBlock = round(playerX/blockSize);
@@ -1501,7 +1506,7 @@ draw = function() {
 	fill(0,255,0);
 	noStroke();
 	strokeWeight(1);
-	rect(10,20,swordDelay*100,10);
+	rect(10,20,swordDelay*10,10);
 	
 	if(swordDelay > 10) {
 		swordDelay = 10;
