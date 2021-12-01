@@ -1322,15 +1322,15 @@ function Mob1(i) {
 			health -= 0.3;
 		}
 		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
-			if(keys[DOWN] && swordDelay < 0) {
+			if(keys[DOWN] && swordDelay >= 10) {
 				mob1[i][2] -= 3;
-				swordDelay = 10;
+				swordDelay = 0;
 			}
 		}
 
 		
 	}
-	swordDelay -= 1;
+	swordDelay += 0.1;
 	
 }
 
@@ -1498,13 +1498,13 @@ draw = function() {
 	rect(10,10,health,20);
 	
 	//sword
-	fill(255,0,0);
+	fill(0,255,0);
 	noStroke();
 	strokeWeight(1);
-	rect(10,30,(-swordDelay*10)+100,20);
+	rect(10,20,swordDelay*100,10);
 	
-	if(swordDelay < 0) {
-		swordDelay = 0;
+	if(swordDelay > 10) {
+		swordDelay = 10;
 	}
 	
 	
