@@ -1340,6 +1340,19 @@ function Mob1(i) {
 		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
 			if(swordDelay < 10) {
 				mob1[i][2] -= 0.5;
+				
+				if (mob1[i][0] < playerX) {
+					mob1[i][0] -= mob1Speed;
+				}
+				if (mob1[i][0] > playerX) {
+					mob1[i][0] += mob1Speed;
+				}
+				if (mob1[i][1] < playerY) {
+					mob1[i][1] -= mob1Speed;
+				}
+				if (mob1[i][1] > playerY) {
+					mob1[i][1] += mob1Speed;
+				}
 			}
 		}
 
