@@ -964,12 +964,14 @@ function drawPlayer() {
 	if(swordDelay < 9.5) {
 		
 		pushMatrix();
+		translate(playerX,playerY);
 		rotate(swordDelay);
-		//translate(playerX,playerY);
-			image(sword,playerX-16,playerY-16,32,32);
+		
+		image(sword,playerX-16,playerY-16,32,32);
+			
 		popMatrix();
 	}
-	swordDelay += 0.1;
+	swordDelay += 0.5;
 	
 	
 	if (playerYSpeed > 0) {
