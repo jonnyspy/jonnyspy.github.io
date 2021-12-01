@@ -965,7 +965,7 @@ function drawPlayer() {
 		
 		pushMatrix();
 		translate(playerX+blockSize/2,playerY+blockSize/2);
-		rotate(swordDelay/2);
+		rotate(-swordDelay/1.5);
 		
 		image(sword,0,0,32,32);
 			
@@ -1516,7 +1516,7 @@ draw = function() {
 	fill(0,255,0);
 	noStroke();
 	strokeWeight(1);
-	rect(10,20,swordDelay*10,10);
+	rect(10,30,swordDelay*10,10);
 	
 	if(swordDelay > 10) {
 		swordDelay = 10;
