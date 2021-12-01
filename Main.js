@@ -1294,37 +1294,39 @@ function Mob1(i) {
 		
 		image(dragon,mob1[i][0]-3*blockSize,mob1[i][1]-3*blockSize,blockSize*6,blockSize*6);
 		
-		
 		if (mob1[i][2] < 0) {
 			mob1[i] = [];
 		}
 			
-		if (mob1[i][0] < playerX) {
-			mob1[i][0] += mob1Speed;
+		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 14*blockSize) {
+
+				
+			if (mob1[i][0] < playerX) {
+				mob1[i][0] += mob1Speed;
+			}
+			if (mob1[i][0] > playerX) {
+				mob1[i][0] -= mob1Speed;
+			}
+			if (mob1[i][1] < playerY) {
+				mob1[i][1] += mob1Speed;
+			}
+			if (mob1[i][1] > playerY) {
+				mob1[i][1] -= mob1Speed;
+			}
 		}
-		if (mob1[i][0] > playerX) {
-			mob1[i][0] -= mob1Speed;
-		}
-		if (mob1[i][1] < playerY) {
-			mob1[i][1] += mob1Speed;
-		}
-		if (mob1[i][1] > playerY) {
-			mob1[i][1] -= mob1Speed;
-		}
-		
 		
 		var mobXBlock = round(mob1[i][0]/blockSize);
 		var mobYBlock = round(mob1[i][1]/blockSize);
 		
 		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 2*blockSize) {
-			health -= 1;
+			health -= 0.1;
 		}
-		//if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 4*blockSize) {
-		//	if(keys[DOWN] && swordDelay < 0) {
-		//		mob1[i][2] -= 3;
-		//		swordDelay = 10;
-		//	}
-		//}
+		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 4*blockSize) {
+			if(keys[DOWN] && swordDelay < 0) {
+				mob1[i][2] -= 3;
+				swordDelay = 10;
+			}
+		}
 
 		
 	}
