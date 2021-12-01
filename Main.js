@@ -1294,11 +1294,15 @@ function Mob1(i) {
 		
 		image(dragon,mob1[i][0]-3*blockSize,mob1[i][1]-3*blockSize,blockSize*6,blockSize*6);
 		
+		fill(255,0,0);
+		stroke(0,255,0);
+		rect(mob1[i][1],mob1[i][0],2,2);
+		
 		if (mob1[i][2] < 0) {
 			mob1[i] = [];
 		}
 			
-		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 14*blockSize) {
+		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 34*blockSize) {
 
 				
 			if (mob1[i][0] < playerX) {
