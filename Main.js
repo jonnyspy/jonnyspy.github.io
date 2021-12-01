@@ -959,7 +959,7 @@ function drawPlayer() {
 	
 	if(keys[DOWN] && swordDelay >= 10) {
 		swordDelay = 0;
-		
+		playerYSpeed = 0;
 	}
 	if(swordDelay < 9.5) {
 		
@@ -1524,6 +1524,9 @@ draw = function() {
 	noStroke();
 	strokeWeight(1);
 	rect(10,10,health,20);
+	if(health > 100) {
+		health = 100;
+	}
 	
 	//sword
 	fill(0,255,0);
