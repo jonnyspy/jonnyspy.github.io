@@ -1296,13 +1296,13 @@ function Mob1(i) {
 		
 		fill(255,0,0);
 		stroke(0,255,0);
-		rect(mob1[i][1],mob1[i][0],2,2);
+		rect(mob1[i][0],mob1[i][1],2,2);
 		
 		if (mob1[i][2] < 0) {
 			mob1[i] = [];
 		}
 			
-		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 34*blockSize) {
+		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 34*blockSize) {
 
 				
 			if (mob1[i][0] < playerX) {
@@ -1322,10 +1322,10 @@ function Mob1(i) {
 		var mobXBlock = round(mob1[i][0]/blockSize);
 		var mobYBlock = round(mob1[i][1]/blockSize);
 		
-		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 2*blockSize) {
+		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 2*blockSize) {
 			health -= 0.1;
 		}
-		if (dist(mob1[i][1],mob1[i][0],playerX,playerY) < 4*blockSize) {
+		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
 			if(keys[DOWN] && swordDelay < 0) {
 				mob1[i][2] -= 3;
 				swordDelay = 10;
