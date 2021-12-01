@@ -1294,10 +1294,6 @@ function Mob1(i) {
 		
 		image(dragon,mob1[i][0]-3*blockSize,mob1[i][1]-3*blockSize,blockSize*6,blockSize*6);
 		
-		fill(255,0,0);
-		stroke(0,255,0);
-		rect(mob1[i][0],mob1[i][1],2,2);
-		
 		if (mob1[i][2] < 0) {
 			mob1[i] = [];
 		}
@@ -1323,7 +1319,7 @@ function Mob1(i) {
 		var mobYBlock = round(mob1[i][1]/blockSize);
 		
 		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 2*blockSize) {
-			health -= 0.1;
+			health -= 0.3;
 		}
 		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
 			if(keys[DOWN] && swordDelay < 0) {
@@ -1500,6 +1496,16 @@ draw = function() {
 	noStroke();
 	strokeWeight(1);
 	rect(10,10,health,20);
+	
+	//sword
+	fill(255,0,0);
+	noStroke();
+	strokeWeight(1);
+	rect(10,30,(-swordDelay*10)+100,20);
+	
+	if(swordDelay < 0) {
+		swordDelay = 0;
+	}
 	
 	
 };
