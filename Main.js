@@ -1331,7 +1331,7 @@ function Mob1(i) {
 		}
 		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
 			if(swordDelay < 10) {
-				mob1[i][2] -= 1;
+				mob1[i][2] -= 0.5;
 			}
 		}
 
