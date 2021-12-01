@@ -965,8 +965,7 @@ function drawPlayer() {
 		
 		pushMatrix();
 		rotate(swordDelay);
-		translate(playerX,playerY);
-		
+		//translate(playerX,playerY);
 			image(sword,playerX-16,playerY-16,32,32);
 		popMatrix();
 	}
