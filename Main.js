@@ -1316,7 +1316,7 @@ function Mob1(i) {
 			mob1[i] = [];
 		}
 			
-		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 34*blockSize) {
+		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 20*blockSize) {
 
 				
 			if (mob1[i][0] < playerX) {
@@ -1535,9 +1535,6 @@ draw = function() {
 	noStroke();
 	strokeWeight(1);
 	rect(10,30,swordDelay*10,10);
-	
-	fill(0,0,255);
-	rect(10,10,100,40);
 	
 	
 	
