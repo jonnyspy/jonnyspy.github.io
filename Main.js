@@ -1399,7 +1399,7 @@ draw = function() {
 				
 			) {
 				
-				portalDrawLoc = [i, j];
+				portalDrawLoc[portalDrawLoc.length] = [i, j];
 				portalLocations[portalLocations.length] = [j*blockSize, i*blockSize];
 				
 			}
@@ -1409,8 +1409,9 @@ draw = function() {
 		}
 	}
 	
-	
-	drawBlock(field[portalDrawLoc[0]][portalDrawLoc[1]],portalDrawLoc[1],portalDrawLoc[0]);
+	for(var i = 0; i < portalDrawLoc.length; i += 1) {
+		drawBlock(field[portalDrawLoc[i][0]][portalDrawLoc[i][1]],portalDrawLoc[i][1],portalDrawLoc[i][0]);
+	}
 
 	
 	
