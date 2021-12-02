@@ -56,6 +56,7 @@ PImage bloodTreeWood;
 PImage leaf;
 PImage dragon;
 PImage sword;
+PImage troll;
 
 var cooldown = 0;
 var room = 0;
@@ -148,6 +149,7 @@ void setup() {
 	bloodLeaf = loadImage("Sprites/blood leaf.png");
 	playerFrame = loadImage("Sprites/player.png");
 	sword = loadImage("Sprites/sword.png");
+	troll = loadImage("Sprites/troll.png");
 }
 
 void keyPressed() {
@@ -1526,6 +1528,10 @@ draw = function() {
 	noStroke();
 	strokeWeight(1);
 	rect(10,10,health,20);
+	
+	fill(255,0,0,100);
+	rect(10,10,100,20);
+	
 	if(health > 100) {
 		health = 100;
 	}
