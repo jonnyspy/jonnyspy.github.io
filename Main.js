@@ -971,6 +971,9 @@ function drawPlayer() {
 		popMatrix();
 	}
 	swordDelay += 0.5;
+	if(swordDelay > 10) {
+		swordDelay = 10;
+	}
 	
 	
 	if (playerYSpeed > 0) {
@@ -1536,9 +1539,7 @@ draw = function() {
 	fill(0,0,255);
 	rect(10,10,100,40);
 	
-	if(swordDelay > 10) {
-		swordDelay = 10;
-	}
+	
 	
 	
 };
