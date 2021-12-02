@@ -1333,10 +1333,10 @@ function Mob1(i) {
 		var mobXBlock = round(mob1[i][0]/blockSize);
 		var mobYBlock = round(mob1[i][1]/blockSize);
 		
-		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 2*blockSize) {
+		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 3*blockSize) {
 			health -= 0.3;
 		}
-		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 4*blockSize) {
+		if (dist(mob1[i][0],mob1[i][1],playerX,playerY) < 5*blockSize) {
 			if(swordDelay < 10) {
 				mob1[i][2] -= 0.5;
 				
@@ -1532,6 +1532,9 @@ draw = function() {
 	noStroke();
 	strokeWeight(1);
 	rect(10,30,swordDelay*10,10);
+	
+	fill(0,0,255);
+	rect(10,10,100,40);
 	
 	if(swordDelay > 10) {
 		swordDelay = 10;
