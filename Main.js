@@ -1452,6 +1452,7 @@ function drawPlayer() {
 		health = 100;
 		
 	}
+
 	
 	if(field[playerYBlockM][playerXBlockM] == FIRE) {
 		playerYSpeed -= 8;
@@ -2016,6 +2017,10 @@ draw = function() {
 					}
 					
 				}
+			}
+			if(room == 11) {
+				playerX = 500;
+				playerY = 200;
 			}
 		}
 		
