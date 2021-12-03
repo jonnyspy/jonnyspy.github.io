@@ -1510,7 +1510,6 @@ draw = function() {
 			mob1[mob1.length] = [yPos*blockSize,xPos*blockSize,10];
 			mobsPerRoom -= 1;
 		}
-		alert(Mob1.length);
 		
 	}
 	
