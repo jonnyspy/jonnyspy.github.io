@@ -1512,7 +1512,7 @@ draw = function() {
 		}
 		
 	}
-	
+	alert(Mob1.length);
 	for(var i = 0; i < mob1.length; i += 1) {
 		Mob1(i);
 	}
