@@ -2011,7 +2011,7 @@ draw = function() {
 					) {
 						
 						playerX = j*blockSize-blockSize/2;
-						playerY = i*blockSize+blockSize*3;
+						playerY = i*blockSize+blockSize*1;
 						
 
 						toPortal = false;
